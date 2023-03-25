@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseBackend
+import AdvertisingBackend
 
 final public class RequestDataAdvertising: RequestData {
     
