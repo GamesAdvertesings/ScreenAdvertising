@@ -6,7 +6,7 @@
 //
 import Combine
 import Foundation
-import VVMLibrary
+import Architecture
 
 final public class AdvertisingScreenViewModel: ViewModel<AdvertisingScreenViewController> {
     

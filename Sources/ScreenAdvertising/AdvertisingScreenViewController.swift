@@ -8,7 +8,7 @@ import SkeletonView
 import Combine
 import UIKit
 import WebKit
-import VVMLibrary
+import Architecture
 
 final public class AdvertisingScreenViewController: UIViewController, ViewProtocol {
     

@@ -10,12 +10,21 @@
       }
     },
     {
-      "identity" : "advertisingappsflyer",
+      "identity" : "advertisingbackend",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/it-senior-developer/AdvertisingAppsFlyer",
+      "location" : "https://github.com/GamesAdvertesings/AdvertisingBackend",
       "state" : {
         "branch" : "master",
-        "revision" : "ce1b4de55507de151cb7808e8cbb04d92c3835c0"
+        "revision" : "96634040011661eed1da4513cb814a13dbf7209d"
+      }
+    },
+    {
+      "identity" : "advertisingflyer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GamesAdvertesings/AdvertisingFlyer",
+      "state" : {
+        "branch" : "master",
+        "revision" : "0b9c5d73cc0bd3ce47f72a8246fd7c431849dc59"
       }
     },
     {
@@ -25,6 +34,15 @@
       "state" : {
         "revision" : "fd2d4e50107280229c77ebfaeb0519ad7e7af83f",
         "version" : "6.10.0"
+      }
+    },
+    {
+      "identity" : "architecture",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GamesAdvertesings/Architecture",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1c51e9c19ad97beb66b433e029f4f1ae677877d2"
       }
     },
     {
@@ -43,15 +61,6 @@
       "state" : {
         "branch" : "master",
         "revision" : "35d61d4ffaea951e92fde007c047e51f7e3bb094"
-      }
-    },
-    {
-      "identity" : "firebasebackend",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/it-senior-developer/FirebaseBackend",
-      "state" : {
-        "branch" : "master",
-        "revision" : "3dd0895c4e705be1a6fafc159c892d86ac63e39f"
       }
     },
     {
@@ -142,15 +151,6 @@
       "state" : {
         "revision" : "0af9125c4eae12a4973fb66574c53a54962a9e1e",
         "version" : "1.21.0"
-      }
-    },
-    {
-      "identity" : "vvmlibrary",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/it-senior-developer/VVMLibrary",
-      "state" : {
-        "branch" : "master",
-        "revision" : "e3d970253ca899ee0f12b85b18043b6f11b91f00"
       }
     }
   ],

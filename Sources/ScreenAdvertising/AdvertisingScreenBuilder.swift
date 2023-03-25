@@ -5,7 +5,7 @@
 //  Copyright © 2022 Developer. All rights reserved.
 //
 import UIKit
-import VVMLibrary
+import Architecture
 
 final public class AdvertisingScreenViewControllerBuilder: BuilderProtocol {
     

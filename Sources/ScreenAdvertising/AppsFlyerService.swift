@@ -5,7 +5,7 @@
 //  Created by Developer on 23.01.2023.
 //
 import AppsFlyerLib
-import AdvertisingAppsFlyer
+import AdvertisingFlyer
 import Foundation
 import Combine
 import UIKit
