@@ -12,29 +12,29 @@ final public class AdvertisingScreenViewControllerBuilder: BuilderProtocol {
     public typealias V  = AdvertisingScreenViewController
     public typealias VM = AdvertisingScreenViewModel
     
-    public var view     : AdvertisingScreenViewController
-    public var viewModel: AdvertisingScreenViewModel
+    public var view       : AdvertisingScreenViewController
+    public var viewManager: AdvertisingScreenViewModel
     
     public static func create() -> AdvertisingScreenViewControllerBuilder {
         let viewController = AdvertisingScreenViewController()
-        let viewModel      = AdvertisingScreenViewModel(
+        let viewManager    = AdvertisingScreenViewModel(
             advertisingWebViewDelegate: AdvertisingWebViewDelegate()
         )
         viewController.loadViewIfNeeded()
-        viewModel.bind(with: viewController)
+        viewManager.bind(with: viewController)
         let selfBuilder = AdvertisingScreenViewControllerBuilder(
             with: viewController,
-            with: viewModel
+            with: viewManager
         )
         return selfBuilder
     }
     
     private init(
         with viewController: AdvertisingScreenViewController,
-        with viewModel: AdvertisingScreenViewModel
+        with viewManager: AdvertisingScreenViewModel
     ) {
-        self.view      = viewController
-        self.viewModel = viewModel
+        self.view        = viewController
+        self.viewManager = viewManager
     }
 }
 

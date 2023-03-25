@@ -19,7 +19,7 @@ let package = Package(
         .package(url: "https://github.com/GamesAdvertesings/Architecture", branch: "main"),
         .package(url: "https://github.com/GamesAdvertesings/AdvertisingBackend", branch: "master"),
         .package(url: "https://github.com/GamesAdvertesings/AdvertisingFlyer", branch: "master"),
-        .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.7.0")
+        .package(url: "https://github.com/Juanpe/SkeletonView.git", .upToNextMajor(from: "1.0.0")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

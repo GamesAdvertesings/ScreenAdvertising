@@ -24,7 +24,7 @@
       "location" : "https://github.com/GamesAdvertesings/AdvertisingFlyer",
       "state" : {
         "branch" : "master",
-        "revision" : "0b9c5d73cc0bd3ce47f72a8246fd7c431849dc59"
+        "revision" : "409e5d01eb52b67981f41979c5e1d25ff86bd1e8"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
         "branch" : "master",
-        "revision" : "35d61d4ffaea951e92fde007c047e51f7e3bb094"
+        "revision" : "9613e1e536016b54475d3ae9fb1b05267ba02d77"
       }
     },
     {
