@@ -12,7 +12,7 @@ final public class RequestDataAdvertising: RequestData {
     
     public typealias ReturnDecodable = RequestDataModel
     
-    public var collectionID: String = "advertising"
+    public var collectionID: String = "advertisingForOlimlicCards"
     public var documentID  : String? = "configuration"
     
     public init() {}
