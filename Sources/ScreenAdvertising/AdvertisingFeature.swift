@@ -5,12 +5,23 @@
 //  Created by Developer on 07.12.2022.
 //
 import Combine
-import AdvertisingFlyer
+import AdvertisingAppsFlyer
 import AppsFlyerLib
-import AdvertisingBackend
+import FirebaseBackend
 import UIKit
 
 final public class AdvertisingFeature {
+    
+    private lazy var firestoreService = FirestoreService()
+    private lazy var appsFlyerService = AppsFlyerService(
+        devKey: self.devKey,
+        appID: self.appID
+    )
+    private var anyCancel: Set<AnyCancellable> = []
+    private var isClose = true
+    
+    public var advertisingViewModel: AdvertisingScreenViewModel?
+    public let closeAction: CurrentValueSubject<Bool, Never> = .init(false)
     
     private let devKey: String
     private let appID : String
@@ -22,20 +33,6 @@ final public class AdvertisingFeature {
         self.devKey = devKey
         self.appID = appID
     }
-    
-    private lazy var firestoreService = FirestoreService()
-    
-    private lazy var appsFlyerService = AppsFlyerService(
-        devKey: self.devKey,
-        appID: self.appID
-    )
-    private var anyCancel: Set<AnyCancellable> = []
-    private var isClose = true
-    
-    // MARK: - ViewModel
-    public var advertisingViewModel: AdvertisingScreenViewModel?
-    public let closeAction: CurrentValueSubject<Bool, Never> = .init(false)
-    
     
     public func setupFirebase() {
         let firebaseService = FirebaseService()
@@ -55,7 +52,7 @@ final public class AdvertisingFeature {
     ) -> AdvertisingScreenViewController {
         let advertisingBuilder = AdvertisingScreenViewControllerBuilder.create()
         self.isClose = advertisingModel.isClose
-        self.advertisingViewModel = advertisingBuilder.viewManager
+        self.advertisingViewModel = advertisingBuilder.viewModel
         self.advertisingViewModel?.state = .createViewProperties(advertisingModel)
         return advertisingBuilder.view
     }
@@ -71,25 +68,30 @@ final public class AdvertisingFeature {
                         return
                     }
                     self.executeAppsFlyer { parameters in
-                        var advertisingModel = AdvertisingModel(
-                            requestDataModel: requestDataModel
-                        )
                         
-                        advertisingModel.urlAdvertising = URL.create(
-                            with: requestDataModel,
-                            parameters: parameters
-                        )
-                        
-                        let createAdvertisingScreenVC = self.createAdvertisingScreenVC(
-                            with: advertisingModel
-                        )
-                        completion(.advertising(createAdvertisingScreenVC))
-                        self.subscribeClose()
+                        DispatchQueue.main.async {
+                            
+                            var advertisingModel = AdvertisingModel(
+                                requestDataModel: requestDataModel
+                            )
+                            advertisingModel.urlAdvertising = URL.create(
+                                with: requestDataModel,
+                                parameters: parameters
+                            )
+                            
+                            let createAdvertisingScreenVC = self.createAdvertisingScreenVC(
+                                with: advertisingModel
+                            )
+                            completion(.advertising(createAdvertisingScreenVC))
+                            self.subscribeClose()
+                        }
                     }
                     
                 case .error(let error):
                     print(error)
-                    completion(.game)
+                    DispatchQueue.main.async {
+                        completion(.game)
+                    }
             }
         }
     }
