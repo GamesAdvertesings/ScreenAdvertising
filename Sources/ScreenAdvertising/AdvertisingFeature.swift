@@ -52,7 +52,7 @@ final public class AdvertisingFeature {
     ) -> AdvertisingScreenViewController {
         let advertisingBuilder = AdvertisingScreenViewControllerBuilder.create()
         self.isClose = advertisingModel.isClose
-        self.advertisingViewModel = advertisingBuilder.viewModel
+        self.advertisingViewModel = advertisingBuilder.viewManager
         self.advertisingViewModel?.state = .createViewProperties(advertisingModel)
         return advertisingBuilder.view
     }
