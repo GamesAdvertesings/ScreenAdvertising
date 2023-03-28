@@ -5,9 +5,9 @@
 //  Created by Developer on 07.12.2022.
 //
 import Combine
-import AdvertisingAppsFlyer
+import AdvertisingFlyer
 import AppsFlyerLib
-import FirebaseBackend
+import AdvertisingBackend
 import UIKit
 
 final public class AdvertisingFeature {
