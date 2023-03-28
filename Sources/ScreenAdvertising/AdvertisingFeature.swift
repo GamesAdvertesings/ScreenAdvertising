@@ -12,8 +12,23 @@ import UIKit
 
 final public class AdvertisingFeature {
     
+    private let devKey: String
+    private let appID : String
+    
+    public init(
+        devKey: String,
+        appID: String
+    ) {
+        self.devKey = devKey
+        self.appID = appID
+    }
+    
     private lazy var firestoreService = FirestoreService()
-    private lazy var appsFlyerService = AppsFlyerService()
+    
+    private lazy var appsFlyerService = AppsFlyerService(
+        devKey: self.devKey,
+        appID: self.appID
+    )
     private var anyCancel: Set<AnyCancellable> = []
     private var isClose = true
     
@@ -46,57 +61,35 @@ final public class AdvertisingFeature {
     }
     
     public func presentAdvertising(completion: @escaping Closure<PresentScreen>){
-        self.executeAppsFlyer { [weak self] parameters in
+        self.getURLAdvertising { [weak self] advertisingURL in
             guard let self = self else { return }
-            guard let parameters = parameters else {
-                completion(.game)
-                return
-            }
-            self.getURLAdvertising { advertisingURL in
-                switch advertisingURL {
-                    case .advertising(let requestDataModel):
-                        guard requestDataModel.isAdvertising else {
-                            completion(.game)
-                            return
-                        }
-                        DispatchQueue.main.async {
-                            var advertisingModel = AdvertisingModel(
-                                requestDataModel: requestDataModel
-                            )
-                            advertisingModel.urlAdvertising = URL.create(
-                                with: requestDataModel,
-                                parameters: parameters
-                            )
-                            
-                            let createAdvertisingScreenVC = self.createAdvertisingScreenVC(
-                                with: advertisingModel
-                            )
-                            completion(.advertising(createAdvertisingScreenVC))
-                            self.subscribeClose()
-                        }
-                        
-                    case .error(let error):
-                        print(error)
+            
+            switch advertisingURL {
+                case .advertising(let requestDataModel):
+                    guard requestDataModel.isAdvertising else {
                         completion(.game)
-                }
-            }
-        }
-    }
-    
-    private func executeFirebase(completion: @escaping Closure<AdvertisingURL>) {
-        let requestData = RequestDataAdvertising()
-        firestoreService.get(requestData: requestData) { result in
-            switch result {
-                case .object(let object):
-                    guard let requestDataModel = object.first else { return }
-                    DispatchQueue.main.async {
-                        completion(.advertising(requestDataModel))
+                        return
+                    }
+                    self.executeAppsFlyer { parameters in
+                        var advertisingModel = AdvertisingModel(
+                            requestDataModel: requestDataModel
+                        )
+                        
+                        advertisingModel.urlAdvertising = URL.create(
+                            with: requestDataModel,
+                            parameters: parameters
+                        )
+                        
+                        let createAdvertisingScreenVC = self.createAdvertisingScreenVC(
+                            with: advertisingModel
+                        )
+                        completion(.advertising(createAdvertisingScreenVC))
                         self.subscribeClose()
                     }
+                    
                 case .error(let error):
-                    DispatchQueue.main.async {
-                        completion(.error(error?.localizedDescription ?? ""))
-                    }
+                    print(error)
+                    completion(.game)
             }
         }
     }
@@ -148,6 +141,4 @@ final public class AdvertisingFeature {
         }
         .store(in: &anyCancel)
     }
-    
-    public init() {}
 }
